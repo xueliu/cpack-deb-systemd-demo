@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# add upstart profile script and start the demo
+INIT_SYSTEM=`cat /proc/1/comm`
+if test $INIT_SYSTEM = "systemd"
+then
+    systemctl stop demo.service 2>/dev/null
+    systemctl disable demo.service 2>/dev/null
+    cp @CPACK_PACKAGING_INSTALL_PREFIX@/config/systemd/demo.service /etc/systemd/system/demo.service
+
+    systemctl daemon-reload
+    systemctl enable demo.service
+    systemctl start demo.service
+    systemctl --no-pager status demo.service
+fi

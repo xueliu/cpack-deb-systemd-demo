@@ -1,0 +1,9 @@
+[Unit]
+Description=Demo
+
+[Service]
+Type=idle
+ExecStart=/usr/bin/demo
+
+[Install]
+WantedBy=multi-user.target
